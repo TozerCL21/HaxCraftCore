@@ -5,3 +5,7 @@ item.HaxCraftCore_storage_component = Storage Component
 item.HaxCraftCore_clock = 2.4GHz Clock
 item.HaxCraftCore_xdisk = XDisk
 item.HaxCraftCore_ram = DDR4 RAM
+item.HaxCraftCore_flamablesword = Flamable Sword
+item.HaxCraftCore_flamableaxe = Flamable Axe
+item.HaxCraftCore_flamableshovel = Flamable Shovel
+item.HaxCraftCore_flamablehoe = Flamable Hoe

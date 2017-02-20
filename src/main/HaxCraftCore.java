@@ -1,5 +1,4 @@
 package com.haxcraft.corelib;
-
 //Imports DO NOT modify. needed for mod to behave as intented
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -25,12 +24,34 @@ public class HaxCraftCore {
 	public static Item xdisk;
 	public static Item clock;
 	public static Item storage_component; 
+	//Tools
+	public static Item flamablepick;
+	public static Item flamableaxe;
+	public static Item flamableshovel;
+	public static Item flamablesword;
+	public static Item flamablehoe;
+	//Blocks
+	public static Block flamableStone;
 @EventHandler
 	public void preInit(FMLPreInitilizationEvent event)
 	{
+		//Tools
+		flamablepick = new ItemFlamablePick(flamium, "flamablepick");
+		flamableaxe = new ItemFlamableAxe(flamium, "flamableaxe");
+		flamableshovel = new ItemlamableShovel(flamium, "flamableshovel");
+		flamablesword = new ItemFlamableSword(flamium, "flamablesword");
+		flamablehoe = new ITemFlamableHoe(flamium, "flamablehoe");
+		GameRegistry.registerItem(flamablepick, "Flamable Pickaxe");
+		GameRegistrty.registerItem(flamableshovel, "Flamable Shovel");
+		GameRegistry.registerItem(flamambleaxe, "Flamable Axe");
+		GameRegisrty.registerItem(flamablehoe, "Flamable Hoe");
+		GameRegistry.registerItem(flamablesword, "Flamable Sword");
 		//Dungeon Key
 		key = new ItemKey();
 		GameRegistry.registerItem(key, "Key");
+	        //Blocks
+	        flamableStone = new BlockFlamableStone();
+	        GameRegistry.registerBlock(flamableStone, "Flamable Stone");
 	        //xcomputer stuff
 		storage_component = new ItemXCraftableGeneric("storage_component");
 		ram = new ItemXCraftableGeneric("ram");
@@ -49,6 +70,8 @@ public class HaxCraftCore {
 		flamabledust = new ItemHaxCraftCoreGeneric("flamabledust");
 		GameRegistry.registerItem(flamableingot, "Flamable Ingot");
 		GameRegistry.registerItem(flamabledust, "Flamable Dust");
+		//Ore Dictionary
+		OreDictionary.registerOre("ingotflamable", new ItemStack(flamableingot)); //Leave names be; we need to follow forge's rules.
 		
 	}
 	@EventHandler 
@@ -63,11 +86,16 @@ public class HaxCraftCore {
 		GameRegistry.addRecipe(new ItemXComputerGeneric(Items.xdisk),
 		"ABC",
 		"DE",
-		'A', Items.gold, 'B', Items.iron, 'C', Items.emerald, 'D', Items.storage_component, 'E', Items.redstone
-		}; 
+		'A', Items.gold, 'B', Items.iron, 'C', Items.emerald, 'D', HaxCraftCore.storage_component, 'E', Items.redstone
+		//Flamable dust smelts into flamable ingots
+		GameRegistry.addSemelting(HaxCraftCore.flamabledust, new ItemStack(HaxCraftCore.flamableingot), 3F);
 		
-
-
+		}; 
+		//Flamable Sword with enchantment
+		ItemStack flamableSwordItemStack = new ItemStack(HaxCraftCore.flamablesword);
+		flamableSwordItemStack.addEnchantment(Enchantment.flame, 1);
+		GameRegistry.addShaplessRecipe(flamableSwordItemStack, HaxCraftCore.flmamablesword);
+	
 		//Stone Sword
 		GameRegistry.addSmelting(Blocks.stone, new ItemStack(Blocks.stonebrick, 0.1F);
 		ItemStack enchantedSwordItemStack = new ItemStack(Items.stone_sword);
